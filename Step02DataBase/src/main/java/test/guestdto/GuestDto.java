@@ -1,21 +1,29 @@
-package test.guest.dto;
+package test.guestdto;
 
 public class GuestDto {
+	//필드
+	/*
+	 * 필드의 type 과 필드명 정하기
+	 */
 	private int num;
 	private String writer;
 	private String content;
 	private String pwd;
 	private String regdate;
-	
+	//디폴트생성자
 	public GuestDto() {}
 	
-	public GuestDto(int num,String writer,String content,String pwd,String regdate) {
-		this.num=num;
-		this.writer=writer;
-		this.content=content;
-		this.pwd=pwd;
-		this.regdate=regdate;
+
+	public GuestDto(int num, String writer, String content, String pwd, String regdate) {
+		super();
+		this.num = num;
+		this.writer = writer;
+		this.content = content;
+		this.pwd = pwd;
+		this.regdate = regdate;
 	}
+
+
 
 	public int getNum() {
 		return num;
@@ -59,5 +67,7 @@ public class GuestDto {
 	
 	
 	
-}
+	
+	
 
+}

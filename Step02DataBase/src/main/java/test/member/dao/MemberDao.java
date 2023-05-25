@@ -194,8 +194,7 @@ public class MemberDao {
  	}
    //회원 목록을 리턴하는 메소드
    public List<MemberDto> getList(){
-      //회원 목록을 담을 객체 미리 생성하기 
-      List<MemberDto> list=new ArrayList<>();
+     List<MemberDto> list = new ArrayList<>();
       
       //필요한 객체의 참조값을 담을 지역변수 미리 만들기
       Connection conn=null;
@@ -205,9 +204,11 @@ public class MemberDao {
          //DbcpBean 객체를 이용해서 Connection 객체를 얻어온다(Connection Pool 에서 얻어오기)
          conn=new DbcpBean().getConn();
          //실행할 sql 문 
-         String sql = " SELECT num,name,addr"
-					+ " FROM member"
-					+ " ORDER BY num ASC";
+         String sql = "SELECT num, name, addr"
+        		 + " FROM member"
+        		 + " ORDER BY num ASC";
+					
+					
          pstmt=conn.prepareStatement(sql);
          //sql 문이 미완성이라면 여기서 완성
          
@@ -216,11 +217,10 @@ public class MemberDao {
          //반복문 돌면서 ResultSet 에 담긴 내용 추출
          while(rs.next()) {
         	 MemberDto dto = new MemberDto();
-				dto.setNum(rs.getInt("num"));
-				dto.setName(rs.getString("name"));
-				dto.setAddr(rs.getString("addr"));
-				//ArrayList 객체에 누적시키기
-				list.add(dto);
+        	 dto.setNum(rs.getInt("num"));
+        	 dto.setName(rs.getString("name"));
+        	 dto.setAddr(rs.getString("addr"));
+			list.add(dto);
          }
       }catch(SQLException se) {
          se.printStackTrace();
