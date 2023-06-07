@@ -22,6 +22,83 @@ public class FileDao {
 			dao=new FileDao();
 		}
 		return dao;
+	}	
+	//회원 한명의ㅣ정보를 삭제하는 메소드
+	   public boolean delete(int num) {
+		   Connection conn = null;
+			PreparedStatement pstmt = null;
+			int rowCount = 0;
+			try {
+				conn = new DbcpBean().getConn();
+				String sql = "DELETE FROM board_file"
+						+ " WHERE num=?";
+				pstmt = conn.prepareStatement(sql);
+				//실행할 sql 문이 미완성이라면 여기서 완성
+				pstmt.setInt(1, num);
+				//sql 문을 수행하고 변화된(추가, 수정, 삭제된) row 의 갯수 리턴 받기
+				rowCount = pstmt.executeUpdate();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			} finally {
+				try {
+					if (pstmt != null)
+						pstmt.close();
+					if (conn != null)
+						conn.close();
+				} catch (Exception e) {
+				}
+			}
+			if (rowCount > 0) {
+	 			return true;
+	 		} else {
+	 			return false;
+	 		}
+	 	}
+	
+	//파일 하나의 정보를 리턴해주는 메소드
+	public FileDto getData(int num) {
+		FileDto dto = null;
+		//필요한 객체의 참조값을 담을 지역변스 미리 만들기
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			//DbcpBean 객체를 이용해서 Connection 객체를 얻어온다(Connection pool 에서 얻어오기)
+			conn = new DbcpBean().getConn();
+			//실행할 sql 문 
+			String sql = "SELECT writer, title, orgFileName, saveFileName, fileSize, regdate"
+					+ " FROM board_file"
+					+ " WHERE num=?";
+			pstmt = conn.prepareStatement(sql);
+			//sql 문이 미완성이라면 여기서 완성
+			pstmt.setInt(1, num);
+			//select 문 수행하고 결과 값 받아오기
+			rs = pstmt.executeQuery();
+			//반복문 돌면서 Resultset 에 담긴 내용추출
+			while (rs.next()) {
+				dto=new FileDto();
+				dto.setNum(num);
+				dto.setWriter(rs.getString("writer"));
+				dto.setTitle(rs.getString("title"));
+				dto.setOrgFileName(rs.getString("orgFileName"));
+				dto.setSaveFileName(rs.getNString("saveFileName"));
+				dto.setFileSize(rs.getLong("fileSize"));
+				dto.setRegdate(rs.getString("regdate"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();//Connection 이 Connection pool 에 반납된다
+			} catch (Exception e) {
+			}
+		}
+		return dto;
 	}
 		
 		public List<FileDto> getList(){
