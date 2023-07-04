@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>	
+		<g2>이벤트 테스트2</g2>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<div id="app">
+			<!-- v-on: 을 줄여서 @로 대체 할수있다 개꿀팁 -->
+			<button @click="clicked">+</button>
+			<button @click="clicked2">-</button>
+			<p>{{count}}</p>
+		</div>
+	
+		<script>
+			new Vue({
+				el:"#app",
+				data:{
+					count:0
+				},
+				methods:{
+					<!-- 줄임표현이다 꿀팁2 -->
+					clicked(){
+						this.count++;
+					},
+					clicked2(){
+						this.count--;
+					},
+					
+				},
+			});
+		
+		</script>
+</body>
+</html>

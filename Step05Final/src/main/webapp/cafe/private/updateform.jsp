@@ -19,6 +19,14 @@
 </head>
 <body>
    <div class="container">
+   <nav >
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
+	    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/cafe/list.jsp">Cafe</a></li>
+	    <li class="breadcrumb-item active" ><a href="${pageContext.request.contextPath}/cafe/detail.jsp?num=<%=dto.getNum()%>">Detail</a></li>
+	    <li class="breadcrumb-item active" ><a href="${pageContext.request.contextPath}/gohome/Home.jsp">집에가기</a></li>
+	  </ol>
+	</nav>
       <h1>글 수정양식</h1>
       <form action="update.jsp" method="post">
          <div class="mb-2">

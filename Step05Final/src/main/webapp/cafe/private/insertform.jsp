@@ -1,3 +1,4 @@
+<%@page import="text.cafe.dto.CafeDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -9,6 +10,13 @@
 </head>
 <body>
 	<div class="container">
+		 <nav >
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/index.jsp">Home</a></li>
+	    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}/cafe/list.jsp">Cafe</a></li>
+		<li class="breadcrumb-item active">Insert</li>
+	  </ol>
+	</nav>
 		<h1>새글 작성 양식</h1>
 		<form action="insert.jsp" method="post">
 			<div class="mb-2">
